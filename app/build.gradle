@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        jcenter() // or
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:2.1.2'
+        }
+    }
+}
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        applicationId "test.jsp.org.testgenerator"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':generator')
+    compile 'com.android.support:appcompat-v7:24.1.1'
+}
